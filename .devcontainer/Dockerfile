@@ -18,9 +18,9 @@ ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
-# COPY requirements.txt /tmp/pip-tmp/
-# RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-#    && rm -rf /tmp/pip-tmp
+COPY requirements.txt /tmp/pip-tmp/
+RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+   && rm -rf /tmp/pip-tmp
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && apt install -y \
@@ -28,10 +28,10 @@ RUN apt-get update && apt install -y \
     libtesseract-dev
 
 # install poetry
-ENV POETRY_HOME=/opt/poetry
-RUN curl -sSL https://install.python-poetry.org | python && \
-    cd /usr/local/bin && \
-    ln -s /opt/poetry/bin/poetry
+# ENV POETRY_HOME=/opt/poetry
+# RUN curl -sSL https://install.python-poetry.org | python && \
+#     cd /usr/local/bin && \
+#     ln -s /opt/poetry/bin/poetry
     # && \
     # poetry config virtualenvs.create false
 
