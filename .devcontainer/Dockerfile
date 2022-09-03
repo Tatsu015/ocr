@@ -25,7 +25,9 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requ
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && apt install -y \
     tesseract-ocr \
-    libtesseract-dev
+    libtesseract-dev \
+    tesseract-ocr-jpn \
+    libgl1-mesa-dev
 
 # install poetry
 # ENV POETRY_HOME=/opt/poetry
